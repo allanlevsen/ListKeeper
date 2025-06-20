@@ -3,9 +3,10 @@ import { NoteService } from '../services/note.service';
 import { Note } from '../models/note-model';
 
 @Component({
-  selector: 'app-note-list',
-  templateUrl: './note-list.component.html',
-  styleUrls: ['./note-list.component.css']
+    selector: 'app-note-list',
+    templateUrl: './note-list.component.html',
+    styleUrls: ['./note-list.component.css'],
+    standalone: false
 })
 export class NoteListComponent implements OnInit {
   notes: Note[];

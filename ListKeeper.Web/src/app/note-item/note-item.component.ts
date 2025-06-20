@@ -2,9 +2,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Note } from '../models/note-model';
 
 @Component({
-  selector: 'app-note-item',
-  templateUrl: './note-item.component.html',
-  styleUrls: ['./note-item.component.css']
+    selector: 'app-note-item',
+    templateUrl: './note-item.component.html',
+    styleUrls: ['./note-item.component.css'],
+    standalone: false
 })
 export class NoteItemComponent {
   @Input() note: Note;

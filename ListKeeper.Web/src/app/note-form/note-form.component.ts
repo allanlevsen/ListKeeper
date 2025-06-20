@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NoteService } from '../services/note.service';
 
 @Component({
-  selector: 'app-note-form',
-  templateUrl: './note-form.component.html',
-  styleUrls: ['./note-form.component.css']
+    selector: 'app-note-form',
+    templateUrl: './note-form.component.html',
+    styleUrls: ['./note-form.component.css'],
+    standalone: false
 })
 export class NoteFormComponent {
   title = '';
