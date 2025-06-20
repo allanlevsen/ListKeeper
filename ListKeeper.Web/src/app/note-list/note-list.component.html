@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row g-4 d-flex flex-wrap">
+    <div *ngFor="let note of notes" class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+      <app-note-item [note]="note" 
+                     (delete)="deleteNote(note.id)" 
+                     (edit)="editNote(note)" 
+                     (complete)="completeNote(note.id)"></app-note-item>
+    </div>
+  </div>
+</div>
