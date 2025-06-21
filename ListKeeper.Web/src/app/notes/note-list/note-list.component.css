@@ -1,0 +1,12 @@
+.card {
+   flex: 1;
+   padding-left: 50px;
+   padding-right: 50px;
+ }
+
+.note-list-container {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+   gap: 16px;
+   padding: 16px;
+ }

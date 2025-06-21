@@ -30,8 +30,7 @@
               "src/styles.css"
             ],
             "scripts": [
-                "node_modules/@popperjs/core/dist/umd/popper.min.js",
-                "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
             "browser": "src/main.ts"
           },
@@ -124,5 +123,8 @@
     "@schematics/angular:resolver": {
       "typeSeparator": "."
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

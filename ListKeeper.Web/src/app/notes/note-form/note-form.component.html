@@ -1,0 +1,12 @@
+<div>
+  <form #form="ngForm">
+    <div class="mb-3">
+      <label for="noteTitle" class="form-label">Title</label>
+      <input type="text" id="noteTitle" class="form-control" [(ngModel)]="title" name="title" required>
+    </div>
+    <div class="mb-3">
+      <label for="noteContent" class="form-label">Content</label>
+      <textarea id="noteContent" class="form-control" [(ngModel)]="content" name="content" required></textarea>
+    </div>
+  </form>
+</div>

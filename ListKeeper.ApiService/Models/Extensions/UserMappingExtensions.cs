@@ -34,7 +34,9 @@ namespace ListKeeperWebApi.WebApi.Models.Extensions
                 Role = user.Role ?? string.Empty,
                 Firstname = user.Firstname, // Firstname and Lastname can be null
                 Lastname = user.Lastname,
-                Token = user.Token, // The token is only populated during login
+                // The token is only populated during login
+                // Also, as a security precaution, we never return the password in the view model
+                Token = user.Token, 
                 CreatedAt = user.CreatedAt,
                 CreatedBy = user.CreatedBy,
                 UpdatedAt = user.UpdatedAt,
@@ -64,6 +66,7 @@ namespace ListKeeperWebApi.WebApi.Models.Extensions
                 Role = viewModel.Role,
                 Firstname = viewModel.Firstname,
                 Lastname = viewModel.Lastname
+
                 // We do not map the Password or Token when converting back to a domain object
                 // as these are handled by specific logic (hashing, generation).
             };

@@ -1,15 +1,14 @@
+
+
 <div class="container">
+  <div class="d-flex justify-content-end p-3">
+  <app-user-status></app-user-status>
+</div>
   <div class="row justify-content-between mb-4">
-    <h1 class="col">ToDo List</h1>
-    <button class="btn btn-primary col-auto" data-bs-toggle="modal" data-bs-target="#addNoteModal">New</button>
+    <h1 class="col">ListKeeper</h1>
+    <button class="btn btn-primary col-auto" data-bs-toggle="modal" data-bs-target="#addNoteModal">Add New Note</button>
   </div>
-  <div class="row g-4 justify-content-center">
-    @for (note of notes; track note) {
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
-        <app-note-item [note]="note" (delete)="deleteNote(note.id)"></app-note-item>
-      </div>
-    }
-  </div>
+  <app-note-list [notes]="notes" (delete)="deleteNote($event)"></app-note-list>
 </div>
 
 <!-- Modal -->
@@ -21,16 +20,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="noteForm">
-          <div class="mb-3">
-            <label for="noteTitle" class="form-label">Title</label>
-            <input type="text" id="noteTitle" class="form-control" formControlName="title">
-          </div>
-          <div class="mb-3">
-            <label for="noteContent" class="form-label">Content</label>
-            <textarea id="noteContent" class="form-control" formControlName="content"></textarea>
-          </div>
-        </form>
+        <app-note-form></app-note-form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

@@ -1,17 +1,29 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NoteService } from './services/note.service';
+import { NoteFormComponent } from './notes/note-form/note-form.component';
+import { NoteListComponent } from './notes/note-list/note-list.component';
+import { UserStatusComponent } from './users/user-status/user-status.component';
 
 // Ensure you have added "bootstrap" types to your project for TypeScript
 declare var bootstrap: any;
 
 @Component({
     selector: 'app-root',
+    standalone: true,
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        NoteFormComponent,
+        NoteListComponent,
+        UserStatusComponent
+    ],
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    standalone: false
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild(NoteFormComponent) noteFormComponent: NoteFormComponent;
   title = 'MacEwan-Keep';
   notes = [];
   noteForm: FormGroup;
@@ -34,21 +46,9 @@ export class AppComponent {
   }
 
   addNote() {
-    if (this.noteForm.valid) {
-      const { title, content } = this.noteForm.value;
-      this.noteService.addNote(title, content);
-      this.notes = this.noteService.getNotes(); // Refresh the notes list
-      this.noteForm.reset(); // Reset the form
-  
-      // Close the modal programmatically
-      this.modalInstance?.hide();
-      
-      // Remove the modal backdrop manually
-      const backdrop = document.querySelector('.modal-backdrop');
-      if (backdrop) {
-        backdrop.remove();
-      }
-    }
+    this.noteFormComponent.addNote();
+    this.notes = this.noteService.getNotes(); // Refresh the notes list
+    this.modalInstance?.hide();
   }
 
   deleteNote(id: number) {

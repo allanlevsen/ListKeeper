@@ -1,11 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Note } from '../models/note-model';
+import { Note } from '../../models/note-model';
 
 @Component({
     selector: 'app-note-item',
+    standalone: true,
+    imports: [CommonModule],
     templateUrl: './note-item.component.html',
-    styleUrls: ['./note-item.component.css'],
-    standalone: false
+    styleUrls: ['./note-item.component.css']
 })
 export class NoteItemComponent {
   @Input() note: Note;

@@ -214,6 +214,8 @@ app.UseHttpsRedirection();
 ////
 //app.UseRouting();
 
+app.UseCors("AllowAll");
+
 // This middleware checks if a request has a valid JWT and figures out who the user is.
 // It MUST come after UseRouting and before UseAuthorization.
 //

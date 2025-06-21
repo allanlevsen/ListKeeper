@@ -117,6 +117,7 @@ namespace ListKeeperWebApi.WebApi.Services
             user.Lastname = userVm.Lastname;
             user.Role = userVm.Role;
             user.Phone = userVm.Phone;
+
             // Note: We deliberately do not update the password here. Password changes
             // should be handled in a separate, dedicated "ChangePassword" method for security.
 
@@ -131,7 +132,8 @@ namespace ListKeeperWebApi.WebApi.Services
         {
             var users = await _repo.GetAllAsync();
             // The `?.` is a null-conditional operator. If 'users' is null, it won't throw an error.
-            // The `??` is a null-coalescing operator. If the result of the Select is null, it returns an empty list instead.
+            // The `??` is a null-coalescing operator.
+            // If the result of the Select is null, it returns an empty list instead.
             return users?.Select(u => u.ToViewModel()) ?? Enumerable.Empty<UserViewModel>();
         }
 
