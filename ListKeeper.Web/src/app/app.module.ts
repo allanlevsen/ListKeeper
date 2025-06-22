@@ -5,12 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NoteListComponent } from './notes/note-list/note-list.component';
-import { NoteItemComponent } from './notes/note-item/note-item.component';
-import { NoteFormComponent } from './notes/note-form/note-form.component';
+import { NoteListComponent } from './components/notes/note-list/note-list.component';
+import { NoteItemComponent } from './components/notes/note-item/note-item.component';
+import { NoteFormComponent } from './components/notes/note-form/note-form.component';
 import { NoteService } from './services/note.service';
-import { UserStatusComponent } from './users/user-status/user-status.component';
-import { LoginComponent } from './users/login/login.component';
+import { UserStatusComponent } from './components/users/user-status/user-status.component';
+import { LoginComponent } from './components/users/login/login.component';
 import { UserService } from './services/user.service';
 
 @NgModule({

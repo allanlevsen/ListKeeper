@@ -1,8 +1,0 @@
-<div class="note-list-container">
-   @for (note of notes; track note) {
-     <app-note-item [note]="note"
-       (delete)="deleteNote(note.id)"
-       (edit)="editNote(note)"
-       (complete)="completeNote(note.id)"></app-note-item>
-   }
- </div>

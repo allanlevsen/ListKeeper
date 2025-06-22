@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary button-spacing" (click)="openAddNoteModal()">Add New Note</button>
+</div>
+
+<div class="note-list-container">
+   @for (note of notes; track note.id) {
+     <app-note-item [note]="note"
+       (delete)="deleteNote(note.id)"
+       (edit)="editNote(note)"
+       (complete)="completeNote(note.id)"></app-note-item>
+   }
+ </div>
+ 
+ <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="addNoteModalLabel">Add New Note</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+         <app-note-form></app-note-form>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+         <button type="button" class="btn btn-primary" (click)="addNote()">Add Note</button>
+       </div>
+     </div>
+   </div>
+ </div>

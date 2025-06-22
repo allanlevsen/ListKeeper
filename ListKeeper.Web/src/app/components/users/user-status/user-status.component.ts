@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { User } from '../../models/user.model';
+import { UserService } from '../../../services/user.service';
+import { User } from '../../../models/user.model';
 import { LoginComponent } from '../login/login.component';
 import { CommonModule } from '@angular/common';
 

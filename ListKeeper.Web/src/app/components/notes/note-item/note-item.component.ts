@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Note } from '../../models/note-model';
+import { Note } from '../../../models/note-model';
 
 @Component({
     selector: 'app-note-item',

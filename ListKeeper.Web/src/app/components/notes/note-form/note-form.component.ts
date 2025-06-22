@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NoteService } from '../../services/note.service';
+import { NoteService } from '../../../services/note.service';
 
 @Component({
   selector: 'app-note-form',
