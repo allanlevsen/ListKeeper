@@ -1,7 +1,47 @@
-<div class="d-flex justify-content-end">
-    <button class="btn btn-primary button-spacing" (click)="openAddNoteModal()">Add New Note</button>
+<!-- Filter and Actions Bar -->
+<div class="filter-bar d-flex justify-content-between align-items-center mb-4">
+    <!-- Left side: Search and Category Filters -->
+    <div class="d-flex align-items-center gap-3">
+        <!-- Search Input -->
+        <div class="search-input-wrapper">
+            <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Search notes..." 
+                aria-label="Search notes"
+                (keyup)="onSearch($event)">
+            <i class="fas fa-search"></i>
+        </div>
+
+        <!-- Category Filter Dropdown -->
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+            </button>
+            <div class="dropdown-menu p-2" aria-labelledby="categoryDropdown" (click)="onDropdownClick($event)" [formGroup]="categoryForm">
+                @for(category of categories; track category) {
+                    <div class="form-check">
+                        <input 
+                            class="form-check-input" 
+                            type="checkbox" 
+                            [formControlName]="category" 
+                            [id]="'check-' + category"
+                            (change)="onCategoryChange(category)">  <!-- This is the key change -->
+                        <label class="form-check-label" [for]="'check-' + category">
+                            {{ category }}
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Right side: Add Note Button -->
+    <button class="btn btn-primary" (click)="openAddNoteModal()">Add New Note</button>
 </div>
 
+
+<!-- Note List Container -->
 <div class="note-list-container">
    @for (note of notes; track note.id) {
      <app-note-item [note]="note"
@@ -9,22 +49,23 @@
        (edit)="editNote(note)"
        (complete)="completeNote(note.id)"></app-note-item>
    }
- </div>
- 
- <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-     <div class="modal-content">
-       <div class="modal-header">
-         <h5 class="modal-title" id="addNoteModalLabel">Add New Note</h5>
-         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-       </div>
-       <div class="modal-body">
-         <app-note-form></app-note-form>
-       </div>
-       <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-         <button type="button" class="btn btn-primary" (click)="addNote()">Add Note</button>
-       </div>
-     </div>
-   </div>
- </div>
+</div>
+
+<!-- Add Note Modal -->
+<div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNoteModalLabel">Add New Note</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-note-form></app-note-form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addNote()">Add Note</button>
+      </div>
+    </div>
+  </div>
+</div>
