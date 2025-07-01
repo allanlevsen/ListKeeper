@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { first } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -16,11 +17,12 @@ declare var window: any;
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   error = '';
-  private formModal: any;
+  isLoading = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,13 +30,10 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.formModal = new window.bootstrap.Modal(
-      document.getElementById('loginModal')
-    );
   }
 
-  open() {
-    this.formModal.show();
+  navigateToSignup(): void {
+    this.router.navigate(['/signup']);
   }
 
   // convenience getter for easy access to form fields
@@ -46,13 +45,18 @@ export class LoginComponent implements OnInit {
     }
 
     this.error = '';
+    this.isLoading = true;
+    
     this.userService.login(this.f['username'].value, this.f['password'].value)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.formModal.hide();
+          this.isLoading = false;
+          // Navigate to the notes page after successful login
+          this.router.navigate(['/notes']);
         },
         error: error => {
+          this.isLoading = false;
           this.error = 'Login failed. Please check your credentials.';
         }
       });

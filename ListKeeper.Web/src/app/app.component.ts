@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-// NoteFormComponent is no longer needed here
-import { NoteListComponent } from './components/notes/note-list/note-list.component';
+import { RouterOutlet } from '@angular/router';
 import { UserStatusComponent } from './components/users/user-status/user-status.component';
 
 @Component({
@@ -9,8 +8,7 @@ import { UserStatusComponent } from './components/users/user-status/user-status.
     standalone: true,
     imports: [
         CommonModule,
-        // NoteFormComponent is no longer in this component's template
-        NoteListComponent,
+        RouterOutlet,
         UserStatusComponent
     ],
     templateUrl: './app.component.html',
@@ -19,6 +17,5 @@ import { UserStatusComponent } from './components/users/user-status/user-status.
 export class AppComponent {
   title = 'ListKeeper';
 
-  // All modal and note management logic has been removed.
   constructor() {}
 }

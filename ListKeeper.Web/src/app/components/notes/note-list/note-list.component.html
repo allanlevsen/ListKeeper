@@ -1,6 +1,7 @@
+<!-- Notes Interface for Logged-In Users -->
 <!-- Filter and Actions Bar -->
 <div class="filter-bar d-flex justify-content-between align-items-center mb-4">
-    <!-- Left side: Search and Category Filters -->
+    <!-- Left side: Search and Status Filters -->
     <div class="d-flex align-items-center gap-3">
         <!-- Search Input -->
         <div class="search-input-wrapper">
@@ -13,22 +14,22 @@
             <i class="fas fa-search"></i>
         </div>
 
-        <!-- Category Filter Dropdown -->
+        <!-- Status Filter Dropdown -->
         <div class="dropdown">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                Categories
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Status
             </button>
-            <div class="dropdown-menu p-2" aria-labelledby="categoryDropdown" (click)="onDropdownClick($event)" [formGroup]="categoryForm">
-                @for(category of categories; track category) {
+            <div class="dropdown-menu p-2" aria-labelledby="statusDropdown" (click)="onDropdownClick($event)" [formGroup]="statusForm">
+                @for(status of statuses; track status) {
                     <div class="form-check">
                         <input 
                             class="form-check-input" 
                             type="checkbox" 
-                            [formControlName]="category" 
-                            [id]="'check-' + category"
-                            (change)="onCategoryChange(category)">  <!-- This is the key change -->
-                        <label class="form-check-label" [for]="'check-' + category">
-                            {{ category }}
+                            [formControlName]="status" 
+                            [id]="'check-' + status"
+                            (change)="onStatusChange(status)">
+                        <label class="form-check-label" [for]="'check-' + status">
+                            {{ status }}
                         </label>
                     </div>
                 }
@@ -39,7 +40,6 @@
     <!-- Right side: Add Note Button -->
     <button class="btn btn-primary" (click)="openAddNoteModal()">Add New Note</button>
 </div>
-
 
 <!-- Note List Container -->
 <div class="note-list-container">

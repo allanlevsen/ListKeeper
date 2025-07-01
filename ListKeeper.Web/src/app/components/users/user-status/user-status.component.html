@@ -2,7 +2,5 @@
   Welcome {{ user.firstname }} {{ user.lastname }}! <a href="#" (click)="logout()">Logout</a>
 </div>
 <ng-template #loggedOut>
-  <a href="#" (click)="login()">Login</a>
+  <a href="#" (click)="login()" *ngIf="shouldShowLoginLink()">Login</a>
 </ng-template>
-
-<app-login></app-login>

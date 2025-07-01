@@ -5,12 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
 import { NoteListComponent } from './components/notes/note-list/note-list.component';
 import { NoteItemComponent } from './components/notes/note-item/note-item.component';
 import { NoteFormComponent } from './components/notes/note-form/note-form.component';
 import { NoteService } from './services/note.service';
 import { UserStatusComponent } from './components/users/user-status/user-status.component';
 import { LoginComponent } from './components/users/login/login.component';
+import { SignupComponent } from './components/users/signup/signup.component';
 import { UserService } from './services/user.service';
 
 @NgModule({
@@ -26,8 +28,10 @@ import { UserService } from './services/user.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HomeComponent,
     UserStatusComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   providers: [
     NoteService,
