@@ -20,9 +20,14 @@ declare var bootstrap: any;
 })
 export class NoteListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(NoteFormComponent) noteFormComponent: NoteFormComponent;
+  @ViewChild('editNoteForm') editNoteFormComponent: NoteFormComponent;
   
   notes: Note[];
   modalInstance: any;
+  editModalInstance: any;
+  deleteModalInstance: any;
+  currentEditingNote: Note | null = null;
+  currentDeletingNote: Note | null = null;
 
   private searchSubject = new Subject<string>();
   private searchSubscription: Subscription;
@@ -51,9 +56,22 @@ export class NoteListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const modalElement = document.getElementById('addNoteModal');
-    if (modalElement) {
-      this.modalInstance = new bootstrap.Modal(modalElement);
+    // Initialize the add note modal
+    const addNoteModalElement = document.getElementById('addNoteModal');
+    if (addNoteModalElement) {
+      this.modalInstance = new bootstrap.Modal(addNoteModalElement);
+    }
+
+    // Initialize the edit note modal
+    const editNoteModalElement = document.getElementById('editNoteModal');
+    if (editNoteModalElement) {
+      this.editModalInstance = new bootstrap.Modal(editNoteModalElement);
+    }
+
+    // Initialize the delete confirmation modal
+    const deleteNoteModalElement = document.getElementById('deleteNoteModal');
+    if (deleteNoteModalElement) {
+      this.deleteModalInstance = new bootstrap.Modal(deleteNoteModalElement);
     }
   }
 
@@ -121,12 +139,40 @@ export class NoteListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteNote(id: number): void {
-    this.noteService.deleteNote(id);
-    this.refreshNotes(this.currentSearchTerm, this.categoryForm.value);
+    // Find the note to delete and show custom confirmation modal
+    const noteToDelete = this.notes.find(note => note.id === id);
+    if (noteToDelete) {
+      this.currentDeletingNote = noteToDelete;
+      this.deleteModalInstance?.show();
+    }
+  }
+
+  confirmDelete(): void {
+    if (this.currentDeletingNote) {
+      this.noteService.deleteNote(this.currentDeletingNote.id);
+      this.refreshNotes(this.currentSearchTerm, this.categoryForm.value);
+      this.deleteModalInstance?.hide();
+      this.currentDeletingNote = null;
+    }
+  }
+
+  cancelDelete(): void {
+    this.deleteModalInstance?.hide();
+    this.currentDeletingNote = null;
   }
 
   editNote(note: Note): void {
-    console.log('Editing note:', note);
+    this.currentEditingNote = note;
+    this.editModalInstance?.show();
+  }
+
+  updateNote(): void {
+    if (this.currentEditingNote && this.editNoteFormComponent) {
+      this.editNoteFormComponent.saveNote();
+      this.refreshNotes(this.currentSearchTerm, this.categoryForm.value);
+      this.editModalInstance?.hide();
+      this.currentEditingNote = null;
+    }
   }
 
   completeNote(id: number): void {

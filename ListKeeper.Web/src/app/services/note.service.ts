@@ -196,4 +196,11 @@ export class NoteService {
   deleteNote(id: number): void {
     this.notes = this.notes.filter(note => note.id !== id);
   }
+
+  updateNote(updatedNote: Note): void {
+    const index = this.notes.findIndex(note => note.id === updatedNote.id);
+    if (index !== -1) {
+      this.notes[index] = updatedNote;
+    }
+  }
 }

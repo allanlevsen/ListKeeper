@@ -102,3 +102,13 @@
 .card-body:hover .icon-bar i {
    opacity: 1;
 }
+
+.icon-bar i.disabled-icon {
+   cursor: not-allowed;
+   opacity: 0.3;
+   color: #6c757d;
+}
+
+.card-body:hover .icon-bar i.disabled-icon {
+   opacity: 0.5;
+}

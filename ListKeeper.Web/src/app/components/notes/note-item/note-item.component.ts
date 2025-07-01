@@ -1,6 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Note } from '../../../models/note-model';
+
+// Declare bootstrap for TypeScript
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-note-item',
@@ -10,11 +13,19 @@ import { Note } from '../../../models/note-model';
   templateUrl: './note-item.component.html',
   styleUrls: ['./note-item.component.css']
 })
-export class NoteItemComponent {
+export class NoteItemComponent implements AfterViewInit {
   @Input() note: Note;
   @Output() delete = new EventEmitter<number>();
-  @Output() edit = new EventEmitter<void>();
+  @Output() edit = new EventEmitter<Note>();
   @Output() complete = new EventEmitter<void>();
+
+  ngAfterViewInit(): void {
+    // Initialize Bootstrap tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  }
 
   onDelete(): void {
     // Prevent default anchor behavior and emit the event
@@ -23,8 +34,8 @@ export class NoteItemComponent {
   }
 
   onEdit(): void {
-    event.preventDefault();
-    this.edit.emit();
+    event?.preventDefault();
+    this.edit.emit(this.note);
   }
 
   onComplete(): void {
